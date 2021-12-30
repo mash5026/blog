@@ -1,0 +1,82 @@
+body {
+    direction: rtl;
+    text-align: right !important;
+    font-family: "Vazir";
+    line-height: 1.6;
+    background: #fff;
+}
+
+* {
+    font-family: 'Vazir', sans-serif;
+}
+
+#log-in-form {
+    margin: 230px auto 0;
+    padding: 10px;
+    color: white;
+    height: auto;
+    max-width: 800px;
+    background-image: url("https://dl.dropboxusercontent.com/s/x4tn6701lpu2oeh/notebook-chill.jpg?dl=0");
+    background-size: cover;
+    direction: rtl;
+}
+
+#log-in-form .heading {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+#log-in-form .form-group {
+    float: right;
+    width: 28%;
+    margin-right: 40px;
+}
+
+#log-in-form .form-control {
+    padding: 15px 25px;
+    height: auto;
+}
+
+#log-in-form .form-group-btn {
+    width: 15%;
+    margin-right: 70px;
+}
+
+#log-in-form .btn {
+    padding: 13px 32px;
+}
+
+#log-in-form .checkbox {
+    float: right;
+    margin: 15px 40px 50px 0px;
+}
+
+@media screen and (max-width: 800px) {
+    #log-in-form {
+        margin: 20px;
+    }
+    #log-in-form .form-group {
+        width: 60%;
+        float: none;
+        margin: 10px auto;
+    }
+    #log-in-form .form-group-btn {
+        margin-top: 30px;
+    }
+    #log-in-form .btn {
+        width: 100%;
+    }
+    #log-in-form .checkbox {
+        width: 60%;
+        float: none;
+        margin: 15px auto 50px auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #log-in-form .form-group,
+    #log-in-form .checkbox {
+        width: 90%;
+    }
+}

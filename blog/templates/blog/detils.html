@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block breabcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="/">خانه</li>
+<li class="breadcrumb-item"><a href={% url 'blog:all_post' %}>پست ها</a></li>
+<li class="breadcrumb-item active">{{post.slug}}</li>
+{% endblock breabcrumb %}
+
+{% block content %}
+<div class="card">
+  <h5 class="card-header mt-0 d-flex mr-0">{{post.title}}</h5>
+  <div class="card-body">
+    <h5 class="card-title mt-0 d-flex mr-0">{{post.get_image}}</h5>
+    <p class="card-text d-flex text-justify">{{post.body|safe}}</p>
+    <p class="card-text d-flex text-justify"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+  <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
+</svg>
+    نوشته شده توسط: {{post.author}}</p>
+    <p class="card-text d-flex text-justify"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-window-fullscreen" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5H.5ZM1 5V2h14v3H1Zm0 1h14v8H1V6Zm2-2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1.5 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"/>
+</svg>
+    دسته بندی: {{post.category}}</p>
+    <p class="card-text d-flex text-justify"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
+  <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+</svg></p>
+    {% for id , tag in post.tag.values_list %}
+    <span class="badge badge-danger float-right ml-2">{{tag}}</span>
+    {% endfor %}
+    <a href="{% url 'blog:all_post' %}" class="btn btn-primary">بازگشت به پست ها</a>
+  </div>
+</div>
+<div class="container mx-auto my-sm-5">
+<p class="d-flex text-justify">نظرات</p>
+{% if comments %}
+  {% for comment in comments  %}
+  <div class="alert alert-primary d-flex text-justify" role="alert">
+  {% if comment.is_hidden %}
+  <p class="container mr-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  </svg>--کاربر : {{comment.body}}</p>
+  {% else %}
+  <p class="container mr-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  </svg>--{{comment.user}} : {{comment.body}}</p>
+  {% endif %}
+{% endfor %}
+{% else %}
+<div class="alert alert-primary d-flex text-justify" role="alert">
+  هنوز نظری بابت این پست ارائه نشده است.
+</div>
+{% endif %}
+</div>
+</div>
+{% endblock content %}
+
+

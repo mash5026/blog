@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jformat %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'image/welcome.jpg' %}"> 
+{% endblock css %}
+{% block breabcrumb %}
+<li class="breadcrumb-item">خانه</li>
+{% endblock breabcrumb %}
+{% block content %}
+
+<img class="rounded mx-auto d-block" src="{% static 'images/welcome.jpg' %}" alt="welcome">
+
+{% endblock content %}
+
+

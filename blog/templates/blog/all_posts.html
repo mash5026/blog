@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jformat %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+{% endblock css %}
+{% block breabcrumb %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="/">خانه</a></li>
+<li class="breadcrumb-item">پست ها</li>
+{% endblock breabcrumb %}
+{% block content %}
+
+{% for post in posts %}
+
+<div class="container shadow rounded mt-5">
+<div class="media">
+  <img src="{{post.image.url}}" class="mr-3 ml-3 my-auto" width="100" heigh="100" alt="...">
+  <div class="media-body ml-0 my-5">
+    <h5 class="mt-0 d-flex mr-0">{{post.title}}</h5>
+    <p class="d-flex text-justify">{{post.body|truncatewords_html:35|safe}}</p>
+    <p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg> {{post.created|jformat:"%Y/%m/%d"}} -
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16">
+  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg> {{post.get_accept_comments_count}}</p>
+<p>
+<button type="button" class="btn btn-outline-success"><a href="{% url 'blog:details' post.slug %}">توضیحات بیشتر</a></button>
+</p>
+  </div>
+</div>
+</div>
+
+{% endfor %}
+
+{% endblock content %}

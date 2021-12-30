@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<form action='.' method='POST' enctype="multipart/form-data" class='form-group form-control-lg'> 
+{% csrf_token %}
+  {{form|crispy}}
+
+  <button type="submit" class="btn btn-primary mt-2">ذخیره</button>
+</form>
+
+{% endblock content %}
